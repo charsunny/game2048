@@ -5,10 +5,106 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
     </dependencies>
     <scenes>
+        <!--Tutorial View Controller-->
+        <scene sceneID="oVP-Pk-VFL">
+            <objects>
+                <viewController storyboardIdentifier="tutorialViiew" useStoryboardIdentifierAsRestorationIdentifier="YES" id="4hT-Ua-N1R" customClass="SXTutorialViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="FiP-RP-Z8I"/>
+                        <viewControllerLayoutGuide type="bottom" id="c4j-Ds-l8A"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="17K-3P-3OI">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" bounces="NO" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pnk-00-Aex">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial_1" translatesAutoresizingMaskIntoConstraints="NO" id="LAi-Qg-PLm">
+                                        <rect key="frame" x="0.0" y="64" width="320" height="480"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="480" id="ea2-vS-j4C"/>
+                                            <constraint firstAttribute="width" constant="320" id="f92-NK-lAu"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial_2" translatesAutoresizingMaskIntoConstraints="NO" id="xXp-Eb-1Z9">
+                                        <rect key="frame" x="320" y="64" width="320" height="480"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="320" id="Dgn-Yq-0pb"/>
+                                            <constraint firstAttribute="height" constant="480" id="KQf-yL-2dE"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36m-l9-wBu">
+                                        <rect key="frame" x="450" y="480" width="60" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="60" id="28Q-7y-cHs"/>
+                                            <constraint firstAttribute="height" constant="30" id="Xs2-vg-r4I"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <state key="normal" title="开始游戏">
+                                            <color key="titleColor" red="0.0" green="0.0" blue="0.59999999999999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="startGame:" destination="4hT-Ua-N1R" eventType="touchUpInside" id="zzN-j4-9l3"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="centerY" secondItem="xXp-Eb-1Z9" secondAttribute="centerY" constant="-20" id="DcX-il-iWx"/>
+                                    <constraint firstAttribute="centerX" secondItem="LAi-Qg-PLm" secondAttribute="centerX" id="Sc3-QI-aLD"/>
+                                    <constraint firstAttribute="centerY" secondItem="LAi-Qg-PLm" secondAttribute="centerY" constant="-20" id="aqX-nP-fE0"/>
+                                    <constraint firstAttribute="centerX" secondItem="36m-l9-wBu" secondAttribute="centerX" constant="-320" id="h1L-Ab-hBp"/>
+                                    <constraint firstAttribute="centerX" secondItem="xXp-Eb-1Z9" secondAttribute="centerX" constant="-320" id="zSg-aO-THz"/>
+                                </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="4hT-Ua-N1R" id="g7Z-Fy-G4G"/>
+                                </connections>
+                            </scrollView>
+                            <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="2" translatesAutoresizingMaskIntoConstraints="NO" id="hMI-4o-AeQ">
+                                <rect key="frame" x="146" y="511" width="29" height="37"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="37" id="Sl0-ka-gpm"/>
+                                    <constraint firstAttribute="width" constant="29" id="aAO-t7-WOF"/>
+                                </constraints>
+                                <color key="pageIndicatorTintColor" red="0.7019608021" green="0.7019608021" blue="0.7019608021" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <connections>
+                                    <action selector="changePage:" destination="4hT-Ua-N1R" eventType="valueChanged" id="ia4-qW-eYv"/>
+                                </connections>
+                            </pageControl>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="Pnk-00-Aex" secondAttribute="trailing" id="3nP-8Z-REo"/>
+                            <constraint firstAttribute="centerX" secondItem="Pnk-00-Aex" secondAttribute="centerX" id="69q-U6-LAk"/>
+                            <constraint firstItem="c4j-Ds-l8A" firstAttribute="top" secondItem="Pnk-00-Aex" secondAttribute="bottom" id="C3v-3i-7Qa"/>
+                            <constraint firstAttribute="centerY" secondItem="Pnk-00-Aex" secondAttribute="centerY" id="Obm-iN-01o"/>
+                            <constraint firstItem="Pnk-00-Aex" firstAttribute="top" secondItem="17K-3P-3OI" secondAttribute="top" id="QGy-vR-f9h"/>
+                            <constraint firstAttribute="centerX" secondItem="hMI-4o-AeQ" secondAttribute="centerX" id="Qz3-Dv-V75"/>
+                            <constraint firstItem="c4j-Ds-l8A" firstAttribute="top" secondItem="hMI-4o-AeQ" secondAttribute="bottom" constant="20" id="eFr-kE-eAy"/>
+                            <constraint firstItem="c4j-Ds-l8A" firstAttribute="top" secondItem="36m-l9-wBu" secondAttribute="bottom" constant="58" id="tkH-7w-cuG"/>
+                            <constraint firstItem="Pnk-00-Aex" firstAttribute="leading" secondItem="17K-3P-3OI" secondAttribute="leading" id="uPV-vH-r3d"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="pageControl" destination="hMI-4o-AeQ" id="qYM-Nw-vrS"/>
+                        <outlet property="scrollview" destination="Pnk-00-Aex" id="Ylu-mu-UhZ"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oau-d1-Kme" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="49" y="-508"/>
+        </scene>
         <!--Navigation Controller-->
         <scene sceneID="bZu-cX-JID">
             <objects>
-                <navigationController definesPresentationContext="YES" id="fHG-kG-se2" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="mainController" definesPresentationContext="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="fHG-kG-se2" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="i4s-Fj-kvJ">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="1" green="0.80000001192092896" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
@@ -30,11 +126,11 @@
                         <viewControllerLayoutGuide type="bottom" id="4dU-pK-Z42"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="sZA-Sn-7LJ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pkA-yx-EJ0">
-                                <rect key="frame" x="0.0" y="116" width="320" height="320"/>
+                                <rect key="frame" x="0.0" y="160" width="320" height="320"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" red="0.70196080207824707" green="0.70196080207824707" blue="0.70196080207824707" alpha="1" colorSpace="calibratedRGB"/>
                                 <gestureRecognizers/>
@@ -44,7 +140,7 @@
                                 </constraints>
                             </view>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PWB-ke-NDB">
-                                <rect key="frame" x="0.0" y="436" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="CHB-2b-HyE"/>
@@ -171,7 +267,7 @@
             <objects>
                 <tableViewController id="MzW-4e-NQY" customClass="SXSettingViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" id="Fse-qg-y0s">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <sections>
@@ -474,7 +570,7 @@
             <objects>
                 <tableViewController id="39Y-bd-lKo" customClass="SXHistoryTableViewController" sceneMemberID="viewController">
                     <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="c74-pp-b6S">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -528,7 +624,7 @@
             <objects>
                 <collectionViewController autoresizesArchivedViewToFullSize="NO" id="7uf-h0-GEz" customClass="SXThemeViewController" sceneMemberID="viewController">
                     <collectionView key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="Jby-JQ-SuR">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.9647059440612793" green="0.98823535442352295" blue="0.9647059440612793" alpha="1" colorSpace="deviceRGB"/>
                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1C0-89-23w">
@@ -562,7 +658,7 @@
                                 <color key="backgroundColor" red="0.89411771297454834" green="0.97254908084869385" blue="0.9647059440612793" alpha="1" colorSpace="deviceRGB"/>
                             </collectionViewCell>
                         </cells>
-                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="rz1-xk-6vM">
+                        <collectionReusableView key="sectionHeaderView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="header" id="rz1-xk-6vM">
                             <rect key="frame" x="0.0" y="64" width="320" height="20"/>
                             <autoresizingMask key="autoresizingMask"/>
                         </collectionReusableView>
@@ -580,11 +676,13 @@
     </scenes>
     <resources>
         <image name="BaseNavigationBar_Right_White_Setting_Highlighted" width="44" height="44"/>
+        <image name="tutorial_1" width="309" height="463"/>
+        <image name="tutorial_2" width="309" height="463"/>
     </resources>
     <color key="tintColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
 </document>

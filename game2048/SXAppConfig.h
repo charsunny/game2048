@@ -29,4 +29,6 @@
 
 @property (nonatomic) BOOL shakeToPlay;
 
+@property (nonatomic) BOOL isStartedUp;
+
 @end

@@ -64,4 +64,12 @@
     return [[[NSUserDefaults standardUserDefaults] objectForKey:@"theme"] intValue];
 }
 
+- (BOOL)isStartedUp {
+    return [[[NSUserDefaults standardUserDefaults] objectForKey:@"first"] boolValue];
+}
+
+- (void)setIsStartedUp:(BOOL)isFirstStartUp {
+    [[NSUserDefaults standardUserDefaults] setObject:@(isFirstStartUp) forKey:@"first"];
+}
+
 @end

@@ -10,6 +10,7 @@
 		50AFD24918E0033400EBEA97 /* SXHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50AFD24818E0033400EBEA97 /* SXHistoryModel.m */; };
 		50AFD24C18E00E5B00EBEA97 /* SXAppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 50AFD24B18E00E5B00EBEA97 /* SXAppConfig.m */; };
 		50AFD24F18E020B800EBEA97 /* SXHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50AFD24E18E020B800EBEA97 /* SXHistoryTableViewController.m */; };
+		50AFD27C18E1373800EBEA97 /* SXTutorialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50AFD27B18E1373800EBEA97 /* SXTutorialViewController.m */; };
 		50C7A87218D9AE4E00A22083 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C7A87118D9AE4E00A22083 /* Foundation.framework */; };
 		50C7A87418D9AE4E00A22083 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C7A87318D9AE4E00A22083 /* CoreGraphics.framework */; };
 		50C7A87618D9AE4E00A22083 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C7A87518D9AE4E00A22083 /* UIKit.framework */; };
@@ -47,6 +48,8 @@
 		50AFD24B18E00E5B00EBEA97 /* SXAppConfig.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXAppConfig.m; sourceTree = "<group>"; };
 		50AFD24D18E020B800EBEA97 /* SXHistoryTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXHistoryTableViewController.h; sourceTree = "<group>"; };
 		50AFD24E18E020B800EBEA97 /* SXHistoryTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXHistoryTableViewController.m; sourceTree = "<group>"; };
+		50AFD27A18E1373800EBEA97 /* SXTutorialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXTutorialViewController.h; sourceTree = "<group>"; };
+		50AFD27B18E1373800EBEA97 /* SXTutorialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXTutorialViewController.m; sourceTree = "<group>"; };
 		50C7A86E18D9AE4E00A22083 /* game2048.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = game2048.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		50C7A87118D9AE4E00A22083 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		50C7A87318D9AE4E00A22083 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -151,6 +154,8 @@
 				50AFD24B18E00E5B00EBEA97 /* SXAppConfig.m */,
 				50AFD24D18E020B800EBEA97 /* SXHistoryTableViewController.h */,
 				50AFD24E18E020B800EBEA97 /* SXHistoryTableViewController.m */,
+				50AFD27A18E1373800EBEA97 /* SXTutorialViewController.h */,
+				50AFD27B18E1373800EBEA97 /* SXTutorialViewController.m */,
 			);
 			path = game2048;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 				50C7A87E18D9AE4E00A22083 /* main.m in Sources */,
 				50C7A9B018DC362D00A22083 /* SXSettingViewController.m in Sources */,
 				50C7A88218D9AE4E00A22083 /* SXAppDelegate.m in Sources */,
+				50AFD27C18E1373800EBEA97 /* SXTutorialViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

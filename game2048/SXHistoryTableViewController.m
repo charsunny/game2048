@@ -57,7 +57,7 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
     SXHistoryModel* model = [_historyArray objectAtIndex:indexPath.row];
-    [cell.textLabel setText:[NSString stringWithFormat:@"得分: %d",model.score]];
+    [cell.textLabel setText:[NSString stringWithFormat:@"得分: %ld",(long)model.score]];
     [cell.detailTextLabel setText:[NSString stringWithFormat:@"时间: %@", model.time]];
     return cell;
 }
