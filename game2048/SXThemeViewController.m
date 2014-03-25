@@ -52,7 +52,7 @@
     [numLabel setFont:[UIFont systemFontOfSize:18]];
     [numLabel setText:_numberArray[pos]];
     [numLabel setBackgroundColor:[UIColor clearColor]];
-    [numLabel setTextColor:[UIColor colorWithRed:119/255.0 green:110/255.0 blue:101/255.0 alpha:1.0f]];
+    [numLabel setTextColor:[UIColor whiteColor]];
     [numLabel setTextAlignment:NSTextAlignmentCenter];
     [numLabel setAdjustsFontSizeToFitWidth:YES];
     

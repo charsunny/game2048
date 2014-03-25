@@ -10,8 +10,9 @@
 #import "SXNumberCell.h"
 #import "SXSettingViewController.h"
 #import "SXAppConfig.h"
+#import "WXApi.h"
 
-@interface SXViewController ()<UIAlertViewDelegate>
+@interface SXViewController ()<UIAlertViewDelegate,UIActionSheetDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 
@@ -97,8 +98,13 @@
     UISwipeGestureRecognizer* swipeDownRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveDown)];
     [swipeDownRecognizer setDirection:UISwipeGestureRecognizerDirectionDown];
     [self.view addGestureRecognizer:swipeDownRecognizer];
+    
+    _moved = YES;
     [self addNumberCell];
     [self addNumberCell];
+    [self updateState];
+    _moved = NO;
+    [_undoButton setEnabled:NO];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -174,6 +180,28 @@
     }
 }
 
+- (void)addNumberCellAtIndex:(NSInteger)index withNumber:(NSInteger)number{
+    if (_emptyCellIndexes.count > 0) {
+        [_emptyCellIndexes removeObject:@(index)];
+        SXNumberCell* cell = [SXNumberCell numberCellWithNumber:number andFrame:CGRectMake(0, 0, 70, 70)];
+        NSInteger posX = index%4;
+        NSInteger posY = index/4;
+        cell.center = CGPointMake(43+78*posX, 43 + 78*posY);
+        cell.transform = CGAffineTransformMakeScale(0.05, 0.05);
+        [cell setTag:index+1];
+        [_bgView addSubview:cell];
+        [UIView animateWithDuration:0.1f animations:^{
+            cell.transform = CGAffineTransformMakeScale(1.1, 1.1);
+        } completion:^(BOOL finished) {
+            if (finished) {
+                [UIView animateWithDuration:0.15 animations:^{
+                    cell.transform = CGAffineTransformMakeScale(1.0f, 1.0f);
+                }];
+            }
+        }];
+    }
+}
+
 - (void)updateState {
     [_undoButton setEnabled:YES];
     [_nowScoreLabel setText:[NSString stringWithFormat:@"%ld",(long)_nowScore]];
@@ -202,7 +230,7 @@
 - (void)restoreState {
     [_stateArray removeLastObject];
     NSArray* nowstate = [_stateArray lastObject];
-    if (_stateArray.count == 0) {
+    if (_stateArray.count == 1) {
         [_undoButton setEnabled:NO];
     }
     for (int i = 0; i < 16; i++) {
@@ -213,13 +241,7 @@
             if ([cell isKindOfClass:[SXNumberCell class]]) {
                 [cell setNumber:number];
             } else {
-                SXNumberCell* cell = [SXNumberCell numberCellWithNumber:number andFrame:CGRectMake(0, 0, 70, 70)];
-                NSInteger posX = i%4;
-                NSInteger posY = i/4;
-                cell.center = CGPointMake(43+78*posX, 43 + 78*posY);
-                cell.transform = CGAffineTransformMakeScale(0.05, 0.05);
-                [cell setTag:i+1];
-                [_bgView addSubview:cell];
+                [self addNumberCellAtIndex:i withNumber:number];
             }
         } else {
             if ([cell isKindOfClass:[SXNumberCell class]]) {
@@ -385,8 +407,12 @@
             [obj removeFromSuperview];
         }
     }];
+    _moved = YES;
     [self addNumberCell];
     [self addNumberCell];
+    [self updateState];
+    _moved = NO;
+    [_undoButton setEnabled:NO];
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -415,6 +441,10 @@
         for (int j = 0; j < 4; j++) {
             UIView* cellBg = [_bgView viewWithTag:i*4+j+100];;
             [cellBg setBackgroundColor:UIColorFromRGB([theme[@"bgcell"] integerValue])];
+            SXNumberCell* cell = (SXNumberCell*)[_bgView viewWithTag:i*4+j+1];
+            if (cell) {
+                [cell setNumber:cell.number];
+            }
         }
     }
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 7.0) {
@@ -433,5 +463,46 @@
         controller.themes = _themes;
     }
 }
+
+- (IBAction)shareButtonClicked:(id)sender {
+    [[[UIActionSheet alloc] initWithTitle:@"分享" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"微信好友",@"微信朋友圈",nil] showInView:self.view];
+}
+
+- (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
+    
+    if (buttonIndex == 0) {
+        [self sendImageContentToCircle:NO];
+    } else if (buttonIndex == 1) {
+        [self sendImageContentToCircle:YES];
+    }
+}
+
+- (void) sendImageContentToCircle:(BOOL)circle {    //发送内容给微信
+    WXMediaMessage *message = [WXMediaMessage message];
+    message.title = @"好玩的2048游戏";
+    message.description = @"过来跟我一起玩吧！";
+    [message setThumbImage:[UIImage imageNamed:@"AppIcon"]];
+    
+    WXAppExtendObject *ext = [WXAppExtendObject object];
+    ext.extInfo = @"<xml>test</xml>";
+    ext.url = @"http://www.baidu.com";
+    
+    Byte* pBuffer = (Byte *)malloc(1024 * 100);
+    memset(pBuffer, 0, 1024 * 100);
+    NSData* data = [NSData dataWithBytes:pBuffer length:1024 * 100];
+    free(pBuffer);
+    
+    ext.fileData = data;
+    
+    message.mediaObject = ext;
+    
+    SendMessageToWXReq* req = [[SendMessageToWXReq alloc] init];
+    req.bText = NO;
+    req.message = message;
+    req.scene = circle?WXSceneTimeline:WXSceneSession;
+    
+    [WXApi sendReq:req];
+}
+
 
 @end

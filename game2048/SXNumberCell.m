@@ -7,6 +7,7 @@
 //
 
 #import "SXNumberCell.h"
+#import "SXAppConfig.h"
 
 
 @interface SXNumberCell()
@@ -19,37 +20,12 @@
 @implementation SXNumberCell
 
 - (UIColor*)getNumberColor:(NSInteger)number {
-    switch (number) {
-        case 2:
-            return UIColorFromRGB(0xFFBBFF);
-        case 4:
-            return UIColorFromRGB(0xFFAEB9);
-        case 8:
-            return UIColorFromRGB(0xFF8C69);
-        case 16:
-            return UIColorFromRGB(0xFF34B3);
-        case 32:
-            return UIColorFromRGB(0x9B30FF);
-        case 64:
-            return UIColorFromRGB(0xA0522D);
-        case 128:
-            return UIColorFromRGB(0xA2CD5A);
-        case 256:
-            return UIColorFromRGB(0x8E8E38);
-        case 512:
-            return UIColorFromRGB(0x8B2500);
-        case 1024:
-            return UIColorFromRGB(0x00EE00);
-        case 2048:
-            return UIColorFromRGB(0x218868);
-        case 4096:
-            return UIColorFromRGB(0x4169E1);
-        case 8192:
-            return UIColorFromRGB(0xEE0000);
-        default:
-            break;
-    }
-    return [UIColor whiteColor];
+    int currectTheme = [[SXAppConfig sharedAppConfig] currectTheme];
+    NSDictionary* theme = [[SXAppConfig sharedAppConfig] theme][currectTheme];
+    NSArray* colors = theme[@"cell"];
+    int index = (int)log2(number);
+    int color = [colors[index%colors.count] intValue];
+    return UIColorFromRGB(color);
 }
 
 - (id)initWithFrame:(CGRect)frame
@@ -63,7 +39,7 @@
         _numLabel = [[UILabel alloc] initWithFrame:self.frame];
         [_numLabel setFont:[UIFont systemFontOfSize:40]];
         [_numLabel setBackgroundColor:[UIColor clearColor]];
-        [_numLabel setTextColor:[UIColor colorWithRed:119/255.0 green:110/255.0 blue:101/255.0 alpha:1.0f]];
+        [_numLabel setTextColor:[UIColor whiteColor]];
         [_numLabel setTextAlignment:NSTextAlignmentCenter];
         [_numLabel setAdjustsFontSizeToFitWidth:YES];
         [self addSubview:_numLabel];

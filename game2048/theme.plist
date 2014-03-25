@@ -2,55 +2,70 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-	<dict>
+    <dict>
 		<key>cell</key>
 		<array>
-			<integer>16759807</integer>
-			<integer>16756409</integer>
-			<integer>16747625</integer>
-			<integer>16725171</integer>
-			<integer>10170623</integer>
-			<integer>10669402</integer>
-			<integer>9342520</integer>
+			<integer>14929751</integer>
+			<integer>16750866</integer>
+			<integer>15240789</integer>
+			<integer>16750866</integer>
+			<integer>15437397</integer>
+			<integer>16769924</integer>
+			<integer>16766720</integer>
+			<integer>14329193</integer>
+			<integer>14919785</integer>
+			<integer>16736512</integer>
+			<integer>15569185</integer>
+			<integer>16744448</integer>
 		</array>
 		<key>bgcell</key>
-		<real>15657130</real>
-		<key>bg</key>
-		<real>16119228</real>
-		<key>name</key>
-		<string>默认</string>
-	</dict>
-	<dict>
-		<key>cell</key>
-		<array>
-			<integer>16759807</integer>
-			<integer>16756409</integer>
-			<integer>16747625</integer>
-			<integer>16725171</integer>
-			<integer>10170623</integer>
-			<integer>10669402</integer>
-			<integer>9342520</integer>
-		</array>
-		<key>bgcell</key>
-		<integer>9662683</integer>
+		<real>9662683</real>
 		<key>bg</key>
 		<real>15132410</real>
 		<key>name</key>
-		<string>轻盈</string>
+		<string>黄色</string>
 	</dict>
 	<dict>
 		<key>cell</key>
 		<array>
-			<integer>16759807</integer>
-			<integer>16756409</integer>
-			<integer>16747625</integer>
-			<integer>16725171</integer>
-			<integer>10170623</integer>
-			<integer>10669402</integer>
-			<integer>9342520</integer>
+			<integer>10249759</integer>
+			<integer>14882573</integer>
+			<integer>16744272</integer>
+			<integer>11674146</integer>
+			<integer>11540255</integer>
+			<integer>11546720</integer>
+			<integer>16761035</integer>
+			<integer>8857175</integer>
+			<integer>16416882</integer>
+			<integer>16737095</integer>
+			<integer>16729344</integer>
+			<integer>16711935</integer>
 		</array>
 		<key>bgcell</key>
-		<integer>4620980</integer>
+		<real>16772244</real>
+		<key>bg</key>
+		<real>8702911</real>
+		<key>name</key>
+		<string>红色</string>
+	</dict>
+    <dict>
+		<key>cell</key>
+		<array>
+			<integer>10720384</integer>
+			<integer>9057807</integer>
+			<integer>8860452</integer>
+			<integer>13789470</integer>
+			<integer>16743744</integer>
+			<integer>15787660</integer>
+			<integer>12357519</integer>
+			<integer>13066516</integer>
+			<integer>7555602</integer>
+			<integer>6170130</integer>
+			<integer>10506797</integer>
+			<integer>9127187</integer>
+		</array>
+		<key>bgcell</key>
+		<real>4620980</real>
 		<key>bg</key>
 		<real>11393254</real>
 		<key>name</key>
@@ -59,20 +74,48 @@
 	<dict>
 		<key>cell</key>
 		<array>
-			<integer>16759807</integer>
-			<integer>16756409</integer>
-			<integer>16747625</integer>
-			<integer>16725171</integer>
-			<integer>10170623</integer>
-			<integer>10669402</integer>
-			<integer>9342520</integer>
+			<integer>4020651</integer>
+			<integer>2003199</integer>
+			<integer>726854</integer>
+			<integer>239774</integer>
+			<integer>1644912</integer>
+			<integer>3383753</integer>
+			<integer>51084</integer>
+			<integer>11591910</integer>
+			<integer>4286945</integer>
+			<integer>6970061</integer>
+			<integer>9948907</integer>
+			<integer>65535</integer>
 		</array>
 		<key>bgcell</key>
-		<integer>16744272</integer>
+		<real>16744272</real>
 		<key>bg</key>
 		<real>16773365</real>
 		<key>name</key>
-		<string>粉红</string>
+		<string>蓝色</string>
+	</dict>
+	<dict>
+		<key>cell</key>
+		<array>
+			<integer>3694095</integer>
+			<integer>536148</integer>
+			<integer>8388564</integer>
+			<integer>4251856</integer>
+			<integer>8388352</integer>
+			<integer>4034880</integer>
+			<integer>51543</integer>
+			<integer>2263842</integer>
+			<integer>8190976</integer>
+			<integer>3329330</integer>
+			<integer>12451017</integer>
+			<integer>7048739</integer>
+		</array>
+		<key>bgcell</key>
+		<real>16744272</real>
+		<key>bg</key>
+		<real>16773365</real>
+		<key>name</key>
+		<string>绿色</string>
 	</dict>
 </array>
 </plist>

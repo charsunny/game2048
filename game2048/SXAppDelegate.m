@@ -9,6 +9,9 @@
 #import "SXAppDelegate.h"
 #import "SXAppConfig.h"
 #import "SXTutorialViewController.h"
+#import "WXApi.h"
+
+#define AppKey_WeiXin               @"wxd930ea5d5a258f4f"//@"wx9a08a4f59ce91bf6"
 
 @implementation SXAppDelegate
 
@@ -21,6 +24,7 @@
         [self.window setRootViewController:tutorialViewController];
         [self.window makeKeyAndVisible];
     }
+    [WXApi registerApp:AppKey_WeiXin];
     return YES;
 }
 							
@@ -49,6 +53,34 @@
 - (void)applicationWillTerminate:(UIApplication *)application
 {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (BOOL)application:(UIApplication *)application handleOpenURL:(NSURL *)url {
+    return YES;
+}
+
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
+    return YES;
+}
+
+/*! @brief 收到一个来自微信的请求，第三方应用程序处理完后调用sendResp向微信发送结果
+ *
+ * 收到一个来自微信的请求，异步处理完成后必须调用sendResp发送处理结果给微信。
+ * 可能收到的请求有GetMessageFromWXReq、ShowMessageFromWXReq等。
+ * @param req 具体请求内容，是自动释放的
+ */
+-(void) onReq:(BaseReq*)req {
+    
+}
+
+/*! @brief 发送一个sendReq后，收到微信的回应
+ *
+ * 收到一个来自微信的处理结果。调用一次sendReq后会收到onResp。
+ * 可能收到的处理结果有SendMessageToWXResp、SendAuthResp等。
+ * @param resp具体的回应内容，是自动释放的
+ */
+-(void) onResp:(BaseResp*)resp {
+    
 }
 
 @end

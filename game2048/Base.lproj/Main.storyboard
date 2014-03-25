@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial_1" translatesAutoresizingMaskIntoConstraints="NO" id="LAi-Qg-PLm">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tt1" translatesAutoresizingMaskIntoConstraints="NO" id="LAi-Qg-PLm">
                                         <rect key="frame" x="0.0" y="64" width="320" height="480"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
@@ -29,7 +29,7 @@
                                             <constraint firstAttribute="width" constant="320" id="f92-NK-lAu"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tutorial_2" translatesAutoresizingMaskIntoConstraints="NO" id="xXp-Eb-1Z9">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="tt2" translatesAutoresizingMaskIntoConstraints="NO" id="xXp-Eb-1Z9">
                                         <rect key="frame" x="320" y="64" width="320" height="480"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <constraints>
@@ -238,7 +238,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Pow2" id="8cL-2D-Exr">
-                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="dZb-WN-CP7"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="action" id="dZb-WN-CP7">
+                            <connections>
+                                <action selector="shareButtonClicked:" destination="ocm-B5-y3m" id="BbI-aC-EiE"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="BaseNavigationBar_Right_White_Setting_Highlighted" id="D55-iZ-CRR">
                             <inset key="imageInsets" minX="-10" minY="0.0" maxX="10" maxY="0.0"/>
                             <connections>
@@ -569,27 +573,27 @@
         <scene sceneID="qfy-ah-3d2">
             <objects>
                 <tableViewController id="39Y-bd-lKo" customClass="SXHistoryTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="c74-pp-b6S">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="c74-pp-b6S">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="blue" accessoryType="disclosureIndicator" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" textLabel="0S6-Zx-ORb" detailTextLabel="Pi1-hX-kLJ" style="IBUITableViewCellStyleSubtitle" id="XH4-FD-IJC">
-                                <rect key="frame" x="0.0" y="86" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="86" width="320" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="XH4-FD-IJC" id="dK4-fu-7xH">
-                                    <rect key="frame" x="0.0" y="0.0" width="287" height="43"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="287" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="得分:0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="0S6-Zx-ORb">
-                                            <rect key="frame" x="15" y="3" width="52" height="22"/>
+                                            <rect key="frame" x="15" y="11" width="52" height="22"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="时间:0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pi1-hX-kLJ">
-                                            <rect key="frame" x="15" y="25" width="35" height="15"/>
+                                            <rect key="frame" x="15" y="33" width="35" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
@@ -676,8 +680,8 @@
     </scenes>
     <resources>
         <image name="BaseNavigationBar_Right_White_Setting_Highlighted" width="44" height="44"/>
-        <image name="tutorial_1" width="309" height="463"/>
-        <image name="tutorial_2" width="309" height="463"/>
+        <image name="tt1" width="309" height="463"/>
+        <image name="tt2" width="309" height="463"/>
     </resources>
     <color key="tintColor" red="0.29803922772407532" green="0.29803922772407532" blue="0.29803922772407532" alpha="1" colorSpace="calibratedRGB"/>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
