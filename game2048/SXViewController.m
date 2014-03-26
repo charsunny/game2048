@@ -490,7 +490,10 @@
 }
 
 - (IBAction)onUndo:(UIBarButtonItem*)sender {
-    _isAutomatic?:[self restoreState];
+    if(_isAutomatic) {
+        [self onFastForward:nil];
+    }
+    [self restoreState];
 }
 
 - (IBAction)onRetry:(UIBarButtonItem*)sender {
@@ -528,6 +531,9 @@
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
     if ([segue.destinationViewController isKindOfClass:[SXSettingViewController class]] ) {
+        if(_isAutomatic) {
+            [self onFastForward:nil];
+        }
         SXSettingViewController* controller = segue.destinationViewController;
         controller.themes = _themes;
     }
@@ -536,6 +542,9 @@
 #pragma mark -- share methods
 
 - (IBAction)shareButtonClicked:(id)sender {
+    if(_isAutomatic) {
+        [self onFastForward:nil];
+    }
     [[[UIActionSheet alloc] initWithTitle:@"分享" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"微信好友",@"微信朋友圈",@"新浪微博",nil] showInView:self.view];
 }
 
