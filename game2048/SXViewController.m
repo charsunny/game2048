@@ -9,8 +9,10 @@
 #import "SXViewController.h"
 #import "SXNumberCell.h"
 #import "SXSettingViewController.h"
+#import "SXTutorialViewController.h"
 #import "SXAppConfig.h"
 #import "WXApi.h"
+#import "WeiboSDK.h"
 
 @interface SXViewController ()<UIAlertViewDelegate,UIActionSheetDelegate>
 
@@ -38,6 +40,10 @@
 
 @property (assign) BOOL moved;
 
+@property (assign) BOOL isAutomatic;
+
+@property (assign) int maxNum;
+
 @property (strong, nonatomic) NSMutableArray* stateArray;
 
 @property (strong, nonatomic) NSArray* themes;
@@ -50,7 +56,7 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib
-    
+    [self showNewbeeGuide];
     _themes = [[SXAppConfig sharedAppConfig] theme];
     
     int currentTheme = [[SXAppConfig sharedAppConfig] currectTheme];
@@ -85,33 +91,41 @@
     [self initBgWith:_themes[currentTheme]];
     UISwipeGestureRecognizer* swipeLeftRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveLeft)];
     [swipeLeftRecognizer setDirection:UISwipeGestureRecognizerDirectionLeft];
-    [self.view addGestureRecognizer:swipeLeftRecognizer];
+    [self.bgView addGestureRecognizer:swipeLeftRecognizer];
     
     UISwipeGestureRecognizer* swipeRightRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveRight)];
     [swipeRightRecognizer setDirection:UISwipeGestureRecognizerDirectionRight];
-    [self.view addGestureRecognizer:swipeRightRecognizer];
+    [self.bgView addGestureRecognizer:swipeRightRecognizer];
     
     UISwipeGestureRecognizer* swipeUpRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveUp)];
     [swipeUpRecognizer setDirection:UISwipeGestureRecognizerDirectionUp];
-    [self.view addGestureRecognizer:swipeUpRecognizer];
+    [self.bgView addGestureRecognizer:swipeUpRecognizer];
     
     UISwipeGestureRecognizer* swipeDownRecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(moveDown)];
     [swipeDownRecognizer setDirection:UISwipeGestureRecognizerDirectionDown];
-    [self.view addGestureRecognizer:swipeDownRecognizer];
+    [self.bgView addGestureRecognizer:swipeDownRecognizer];
     
     _moved = YES;
-    [self addNumberCell];
     [self addNumberCell];
     [self updateState];
     _moved = NO;
     [_undoButton setEnabled:NO];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewDidLayoutSubviews {
+    [super viewDidLayoutSubviews];
     if ([[[UIDevice currentDevice] systemVersion] floatValue] < 7.0) {
         _bgView.center = CGPointMake(_bgView.center.x, _bgView.center.y-32);
     }
+}
+
+- (void)showNewbeeGuide {
+    if (![[SXAppConfig sharedAppConfig] isStartedUp]) {
+        [[SXAppConfig sharedAppConfig] setIsStartedUp:YES];
+        SXTutorialViewController* tutorialViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"tutorialViiew"];
+        [self presentViewController:tutorialViewController animated:NO completion:nil];
+    }
+
 }
 
 - (void)initBgWith:(NSDictionary*)theme
@@ -132,28 +146,30 @@
     }
 }
 
-- (void)judgeIsOver {
-    BOOL over = YES;
+- (BOOL)judgeIsOver {
+    if (_emptyCellIndexes.count > 0) {
+        return NO;
+    }
     for (int i = 0; i < 4; i++) {
         for (int j = 1; j < 4; j++) {
             SXNumberCell* rowcell = (SXNumberCell*)[_bgView viewWithTag:i*4+j+1];
             SXNumberCell* perrowcell = (SXNumberCell*)[_bgView viewWithTag:i*4+j];
-            if (rowcell.number == perrowcell.number) {
-                over = NO;
-                break;
+            if (!rowcell || !perrowcell) {
+                return NO;
+            }
+            if (rowcell.number == perrowcell.number ) {
+                return NO;
             }
             SXNumberCell* colcell = (SXNumberCell*)[_bgView viewWithTag:j*4+i+1];
             SXNumberCell* percolcell = (SXNumberCell*)[_bgView viewWithTag:(j-1)*4+i+1];
             if (colcell.number == percolcell.number) {
-                over = NO;
-                break;
+                return NO;
             }
+            _maxNum = MAX(colcell.number, _maxNum);
+            _maxNum = MAX(_maxNum, percolcell.number);
         }
     }
-    if (over) {
-        [[NSUserDefaults standardUserDefaults] setValue:@(_highScore) forKey:@"highscore"];
-        [[[UIAlertView alloc] initWithTitle:@"提示" message:@"你输了，哈哈！" delegate:self cancelButtonTitle:@"再来一发" otherButtonTitles:nil, nil] show];
-    }
+    return YES;
 }
 
 - (void)addNumberCell {
@@ -165,11 +181,12 @@
         NSInteger posX = cellIndex%4;
         NSInteger posY = cellIndex/4;
         cell.center = CGPointMake(43+78*posX, 43 + 78*posY);
-        cell.transform = CGAffineTransformMakeScale(0.05, 0.05);
+        cell.alpha = 0;
         [cell setTag:cellIndex+1];
         [_bgView addSubview:cell];
-        [UIView animateWithDuration:0.1f animations:^{
+        [UIView animateWithDuration:0.1f delay:0.1f options:UIViewAnimationOptionTransitionNone animations:^{
             cell.transform = CGAffineTransformMakeScale(1.1, 1.1);
+            cell.alpha = 1.0f;
         } completion:^(BOOL finished) {
             if (finished) {
                 [UIView animateWithDuration:0.15 animations:^{
@@ -187,10 +204,11 @@
         NSInteger posX = index%4;
         NSInteger posY = index/4;
         cell.center = CGPointMake(43+78*posX, 43 + 78*posY);
-        cell.transform = CGAffineTransformMakeScale(0.05, 0.05);
+        cell.alpha = 0;
         [cell setTag:index+1];
         [_bgView addSubview:cell];
         [UIView animateWithDuration:0.1f animations:^{
+            cell.alpha = 1;
             cell.transform = CGAffineTransformMakeScale(1.1, 1.1);
         } completion:^(BOOL finished) {
             if (finished) {
@@ -209,22 +227,33 @@
         _highScore = _nowScore;
         [_highScoreLabel setText:[NSString stringWithFormat:@"%ld",(long)_highScore]];
     }
-    _emptyCellIndexes.count?:[self judgeIsOver];
+    if([self judgeIsOver]) {
+        if(_isAutomatic) {
+            [self onFastForward:nil];
+        }
+        [self saveState];
+        [[NSUserDefaults standardUserDefaults] setValue:@(_highScore) forKey:@"highscore"];
+        [[[UIAlertView alloc] initWithTitle:@"提示" message:[NSString stringWithFormat: @"LOSER!\n 得分是:%ld \n 最大数字是:%d \n 最高分是:%ld",(long)_nowScore, _maxNum,(long)_highScore] delegate:self cancelButtonTitle:@"再来一发" otherButtonTitles:@"撤销一下", nil] show];
+    }
     if(_moved) {
         [self addNumberCell];
-        NSMutableArray* nowstate = [NSMutableArray new];
-        for (int i = 0; i < 16; i++) {
-            SXNumberCell* cell = (SXNumberCell*)[_bgView viewWithTag:(i+1)];
-            if (cell && [cell isKindOfClass:[SXNumberCell class]]) {
-                [nowstate addObject:@(cell.number)];
-            } else {
-                [nowstate addObject:@0];
-            }
-        }
-        [nowstate addObject:@(_nowScore)];
-        [nowstate addObject:@(_highScore)];
-        [_stateArray addObject:nowstate];
+        [self saveState];
     }
+}
+
+- (void)saveState {
+    NSMutableArray* nowstate = [NSMutableArray new];
+    for (int i = 0; i < 16; i++) {
+        SXNumberCell* cell = (SXNumberCell*)[_bgView viewWithTag:(i+1)];
+        if (cell && [cell isKindOfClass:[SXNumberCell class]]) {
+            [nowstate addObject:@(cell.number)];
+        } else {
+            [nowstate addObject:@0];
+        }
+    }
+    [nowstate addObject:@(_nowScore)];
+    [nowstate addObject:@(_highScore)];
+    [_stateArray addObject:nowstate];
 }
 
 - (void)restoreState {
@@ -250,6 +279,10 @@
             }
         }
     }
+    _nowScore = [nowstate[16] integerValue];
+    _highScore = [nowstate[17] integerValue];
+    [_nowScoreLabel setText:[NSString stringWithFormat:@"%ld",(long)_nowScore]];
+    [_highScoreLabel setText:[NSString stringWithFormat:@"%ld",(long)_highScore]];
 }
 
 - (void)moveRight {
@@ -263,7 +296,6 @@
                 SXNumberCell* lastCell = [array lastObject];
                 if (cell.number == lastCell.number && !lastCell.mergeCell) {
                     [lastCell setMergeCell:cell.tag];
-                    [lastCell setNumber:2*cell.number];
                     _nowScore += lastCell.number;
                 } else {
                     [array addObject:cell];
@@ -295,7 +327,6 @@
                 SXNumberCell* lastCell = [array lastObject];
                 if (cell.number == lastCell.number && !lastCell.mergeCell) {
                     [lastCell setMergeCell:cell.tag];
-                    [lastCell setNumber:2*cell.number];
                     _nowScore += lastCell.number;
                 } else {
                     [array addObject:cell];
@@ -327,7 +358,6 @@
                 SXNumberCell* lastCell = [array lastObject];
                 if (cell.number == lastCell.number && !lastCell.mergeCell) {
                     [lastCell setMergeCell:cell.tag];
-                    [lastCell setNumber:2*cell.number];
                     _nowScore += lastCell.number;
                 } else {
                     [array addObject:cell];
@@ -359,7 +389,6 @@
                 SXNumberCell* lastCell = [array lastObject];
                 if (cell.number == lastCell.number && !lastCell.mergeCell) {
                     [lastCell setMergeCell:cell.tag];
-                    [lastCell setNumber:2*cell.number];
                     _nowScore += lastCell.number;
                 } else {
                     [array addObject:cell];
@@ -381,20 +410,19 @@
 }
 
 - (IBAction)refresh:(id)sender {
-    SXHistoryModel* model = [SXHistoryModel new];
-    model.score = _nowScore;
-    model.steps = _stateArray;
-    NSDateFormatter* foramter = [NSDateFormatter new];
-    [foramter setDateFormat:@"yyyy-MM-dd HH:mm"];
-    model.time = [foramter stringFromDate:[NSDate date]];
-    [[SXAppConfig sharedAppConfig] appendHistory:model];
-    _nowScore = 0;
+    if (_nowScore > 0) {
+        SXHistoryModel* model = [SXHistoryModel new];
+        model.score = _nowScore;
+        model.steps = [_stateArray lastObject];
+        model.maxNum = _maxNum;
+        NSDateFormatter* foramter = [NSDateFormatter new];
+        [foramter setDateFormat:@"yyyy-MM-dd HH:mm"];
+        model.time = [foramter stringFromDate:[NSDate date]];
+        [[SXAppConfig sharedAppConfig] appendHistory:model];
+        _nowScore = 0;
+    }
     [_stateArray removeAllObjects];
     [_nowScoreLabel setText:[NSString stringWithFormat:@"%ld",(long)_nowScore]];
-    if(_nowScore > _highScore) {
-        _highScore = _nowScore;
-        [_highScoreLabel setText:[NSString stringWithFormat:@"%ld",(long)_highScore]];
-    }
     [[NSUserDefaults standardUserDefaults] setValue:@(_highScore) forKey:@"highscore"];
     _emptyCellIndexes = [[NSMutableSet alloc] initWithObjects:
                          @0, @1, @2, @3,
@@ -409,7 +437,6 @@
     }];
     _moved = YES;
     [self addNumberCell];
-    [self addNumberCell];
     [self updateState];
     _moved = NO;
     [_undoButton setEnabled:NO];
@@ -423,11 +450,53 @@
 
 #pragma mark -- toolbar methods
 
+- (IBAction)onFastForward:(UIBarButtonItem *)sender {
+    _isAutomatic = !_isAutomatic;
+    [self.bgView setUserInteractionEnabled:_isAutomatic?NO:YES];
+    if (_isAutomatic) {
+        [self fastForward];
+    }
+}
+
+- (void)fastForward {
+    if (!_isAutomatic) {
+        return;
+    }
+    static int lastDirection = 0;
+    int curDirection = rand()%4;
+    while (curDirection == lastDirection) {
+        curDirection = rand()%4;
+    }
+    lastDirection = curDirection;
+    switch (curDirection) {
+        case 0:
+            [self moveLeft];
+            break;
+        case 1:
+            [self moveRight];
+            break;
+        case 2:
+            [self moveUp];
+            break;
+        case 3:
+            [self moveDown];
+            break;
+        default:
+            break;
+    }
+    if(![self judgeIsOver]) {
+        [self performSelector:@selector(fastForward) withObject:nil afterDelay:.5];
+    }
+}
+
 - (IBAction)onUndo:(UIBarButtonItem*)sender {
-    [self restoreState];
+    _isAutomatic?:[self restoreState];
 }
 
 - (IBAction)onRetry:(UIBarButtonItem*)sender {
+    if(_isAutomatic) {
+        [self onFastForward:nil];
+    }
     [[[UIAlertView alloc] initWithTitle:@"提示" message:@"确定要重新开始吗？" delegate:self cancelButtonTitle:@"再来一发" otherButtonTitles:@"取消", nil] show];
 }
 
@@ -464,8 +533,10 @@
     }
 }
 
+#pragma mark -- share methods
+
 - (IBAction)shareButtonClicked:(id)sender {
-    [[[UIActionSheet alloc] initWithTitle:@"分享" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"微信好友",@"微信朋友圈",nil] showInView:self.view];
+    [[[UIActionSheet alloc] initWithTitle:@"分享" delegate:self cancelButtonTitle:@"取消" destructiveButtonTitle:nil otherButtonTitles:@"微信好友",@"微信朋友圈",@"新浪微博",nil] showInView:self.view];
 }
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -474,6 +545,8 @@
         [self sendImageContentToCircle:NO];
     } else if (buttonIndex == 1) {
         [self sendImageContentToCircle:YES];
+    } else if (buttonIndex == 2) {
+        [self sendImageContentToWeibo];
     }
 }
 
@@ -502,6 +575,17 @@
     req.scene = circle?WXSceneTimeline:WXSceneSession;
     
     [WXApi sendReq:req];
+}
+
+- (void)sendImageContentToWeibo {
+    WBMessageObject* message = [[WBMessageObject alloc] init];
+    message.text = @"好玩的2048游戏";
+    WBImageObject* imageObject = [[WBImageObject alloc] init];
+    imageObject.imageData = [NSData dataWithContentsOfFile:[[NSBundle mainBundle] pathForResource:@"tt1" ofType:@"png"]];
+    message.imageObject = imageObject;
+    WBSendMessageToWeiboRequest* request = [WBSendMessageToWeiboRequest requestWithMessage:message];
+    request.userInfo = @{@"ShareMessageFrom": @"SXViewController"};
+    [WeiboSDK sendRequest:request];
 }
 
 

@@ -10,21 +10,21 @@
 #import "SXAppConfig.h"
 #import "SXTutorialViewController.h"
 #import "WXApi.h"
+#import "WeiboSDK.h"
+#import "SXGCHelper.h"
 
 #define AppKey_WeiXin               @"wxd930ea5d5a258f4f"//@"wx9a08a4f59ce91bf6"
+#define AppKey_WeiBo                @"979020811"
 
 @implementation SXAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     // Override point for customization after application launch.
-    if (![[SXAppConfig sharedAppConfig] isStartedUp]) {
-        [[SXAppConfig sharedAppConfig] setIsStartedUp:YES];
-        SXTutorialViewController* tutorialViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"tutorialViiew"];
-        [self.window setRootViewController:tutorialViewController];
-        [self.window makeKeyAndVisible];
-    }
     [WXApi registerApp:AppKey_WeiXin];
+    [WeiboSDK enableDebugMode:YES];
+    [WeiboSDK registerApp:AppKey_WeiBo];
+    [[SXGCHelper sharedInstance] authenticateLocalUser];
     return YES;
 }
 							

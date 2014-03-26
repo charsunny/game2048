@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5022492918E1C7D4009ABF12 /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5022492818E1C7D4009ABF12 /* GameKit.framework */; };
+		5076807118E1CD1700BD9422 /* SXGCHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 5076807018E1CD1700BD9422 /* SXGCHelper.m */; };
+		5076807618E1E02B00BD9422 /* libWeiboSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5076807318E1E02B00BD9422 /* libWeiboSDK.a */; };
+		5076807718E1E02B00BD9422 /* WeiboSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 5076807418E1E02B00BD9422 /* WeiboSDK.bundle */; };
+		50ADDAC218E2BF2A001697F5 /* SXReplayViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50ADDAC118E2BF2A001697F5 /* SXReplayViewController.m */; };
 		50AFD24918E0033400EBEA97 /* SXHistoryModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 50AFD24818E0033400EBEA97 /* SXHistoryModel.m */; };
 		50AFD24C18E00E5B00EBEA97 /* SXAppConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 50AFD24B18E00E5B00EBEA97 /* SXAppConfig.m */; };
 		50AFD24F18E020B800EBEA97 /* SXHistoryTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 50AFD24E18E020B800EBEA97 /* SXHistoryTableViewController.m */; };
@@ -43,6 +48,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5022492818E1C7D4009ABF12 /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		5076806F18E1CD1700BD9422 /* SXGCHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXGCHelper.h; sourceTree = "<group>"; };
+		5076807018E1CD1700BD9422 /* SXGCHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXGCHelper.m; sourceTree = "<group>"; };
+		5076807318E1E02B00BD9422 /* libWeiboSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libWeiboSDK.a; sourceTree = "<group>"; };
+		5076807418E1E02B00BD9422 /* WeiboSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = WeiboSDK.bundle; sourceTree = "<group>"; };
+		5076807518E1E02B00BD9422 /* WeiboSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WeiboSDK.h; sourceTree = "<group>"; };
+		50ADDAC018E2BF2A001697F5 /* SXReplayViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXReplayViewController.h; sourceTree = "<group>"; };
+		50ADDAC118E2BF2A001697F5 /* SXReplayViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXReplayViewController.m; sourceTree = "<group>"; };
 		50AFD24718E0033400EBEA97 /* SXHistoryModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXHistoryModel.h; sourceTree = "<group>"; };
 		50AFD24818E0033400EBEA97 /* SXHistoryModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SXHistoryModel.m; sourceTree = "<group>"; };
 		50AFD24A18E00E5B00EBEA97 /* SXAppConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SXAppConfig.h; sourceTree = "<group>"; };
@@ -88,9 +101,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				50C7A87418D9AE4E00A22083 /* CoreGraphics.framework in Frameworks */,
+				5076807618E1E02B00BD9422 /* libWeiboSDK.a in Frameworks */,
 				50C7A87618D9AE4E00A22083 /* UIKit.framework in Frameworks */,
 				50AFD2C418E171CA00EBEA97 /* libWeChatSDK.a in Frameworks */,
 				50C7A87218D9AE4E00A22083 /* Foundation.framework in Frameworks */,
+				5022492918E1C7D4009ABF12 /* GameKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -107,6 +122,64 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5022492A18E1CA1E009ABF12 /* controllers */ = {
+			isa = PBXGroup;
+			children = (
+				50C7A9B118DC364600A22083 /* SXThemeViewController.h */,
+				50AFD24D18E020B800EBEA97 /* SXHistoryTableViewController.h */,
+				50AFD24E18E020B800EBEA97 /* SXHistoryTableViewController.m */,
+				50AFD27A18E1373800EBEA97 /* SXTutorialViewController.h */,
+				50AFD27B18E1373800EBEA97 /* SXTutorialViewController.m */,
+				50C7A9B218DC364600A22083 /* SXThemeViewController.m */,
+				50C7A9AE18DC362D00A22083 /* SXSettingViewController.h */,
+				50C7A9AF18DC362D00A22083 /* SXSettingViewController.m */,
+				50C7A88618D9AE4E00A22083 /* SXViewController.h */,
+				50C7A88718D9AE4E00A22083 /* SXViewController.m */,
+				50ADDAC018E2BF2A001697F5 /* SXReplayViewController.h */,
+				50ADDAC118E2BF2A001697F5 /* SXReplayViewController.m */,
+			);
+			name = controllers;
+			sourceTree = "<group>";
+		};
+		5076806C18E1CCA700BD9422 /* utils */ = {
+			isa = PBXGroup;
+			children = (
+				50AFD24A18E00E5B00EBEA97 /* SXAppConfig.h */,
+				50AFD24B18E00E5B00EBEA97 /* SXAppConfig.m */,
+				5076806F18E1CD1700BD9422 /* SXGCHelper.h */,
+				5076807018E1CD1700BD9422 /* SXGCHelper.m */,
+			);
+			name = utils;
+			sourceTree = "<group>";
+		};
+		5076806D18E1CCBC00BD9422 /* views */ = {
+			isa = PBXGroup;
+			children = (
+				50C7A96718DADE1D00A22083 /* SXNumberCell.h */,
+				50C7A96818DADE1D00A22083 /* SXNumberCell.m */,
+			);
+			name = views;
+			sourceTree = "<group>";
+		};
+		5076806E18E1CCCC00BD9422 /* models */ = {
+			isa = PBXGroup;
+			children = (
+				50AFD24718E0033400EBEA97 /* SXHistoryModel.h */,
+				50AFD24818E0033400EBEA97 /* SXHistoryModel.m */,
+			);
+			name = models;
+			sourceTree = "<group>";
+		};
+		5076807218E1E02B00BD9422 /* libWeiboSDK */ = {
+			isa = PBXGroup;
+			children = (
+				5076807318E1E02B00BD9422 /* libWeiboSDK.a */,
+				5076807418E1E02B00BD9422 /* WeiboSDK.bundle */,
+				5076807518E1E02B00BD9422 /* WeiboSDK.h */,
+			);
+			path = libWeiboSDK;
+			sourceTree = "<group>";
+		};
 		50AFD2C018E171CA00EBEA97 /* WeChat */ = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +212,7 @@
 		50C7A87018D9AE4E00A22083 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5022492818E1C7D4009ABF12 /* GameKit.framework */,
 				50C7A87118D9AE4E00A22083 /* Foundation.framework */,
 				50C7A87318D9AE4E00A22083 /* CoreGraphics.framework */,
 				50C7A87518D9AE4E00A22083 /* UIKit.framework */,
@@ -150,28 +224,13 @@
 		50C7A87718D9AE4E00A22083 /* game2048 */ = {
 			isa = PBXGroup;
 			children = (
+				5076807218E1E02B00BD9422 /* libWeiboSDK */,
+				5076806E18E1CCCC00BD9422 /* models */,
+				5076806D18E1CCBC00BD9422 /* views */,
+				5076806C18E1CCA700BD9422 /* utils */,
+				5022492A18E1CA1E009ABF12 /* controllers */,
 				50AFD2C018E171CA00EBEA97 /* WeChat */,
-				50C7A88018D9AE4E00A22083 /* SXAppDelegate.h */,
-				50C7A88118D9AE4E00A22083 /* SXAppDelegate.m */,
-				50C7A88318D9AE4E00A22083 /* Main.storyboard */,
-				50C7A9B118DC364600A22083 /* SXThemeViewController.h */,
-				50C7A9B218DC364600A22083 /* SXThemeViewController.m */,
-				50C7A9AE18DC362D00A22083 /* SXSettingViewController.h */,
-				50C7A9AF18DC362D00A22083 /* SXSettingViewController.m */,
-				50C7A88618D9AE4E00A22083 /* SXViewController.h */,
-				50C7A88718D9AE4E00A22083 /* SXViewController.m */,
-				50C7A88918D9AE4E00A22083 /* Images.xcassets */,
 				50C7A87818D9AE4E00A22083 /* Supporting Files */,
-				50C7A96718DADE1D00A22083 /* SXNumberCell.h */,
-				50C7A96818DADE1D00A22083 /* SXNumberCell.m */,
-				50AFD24718E0033400EBEA97 /* SXHistoryModel.h */,
-				50AFD24818E0033400EBEA97 /* SXHistoryModel.m */,
-				50AFD24A18E00E5B00EBEA97 /* SXAppConfig.h */,
-				50AFD24B18E00E5B00EBEA97 /* SXAppConfig.m */,
-				50AFD24D18E020B800EBEA97 /* SXHistoryTableViewController.h */,
-				50AFD24E18E020B800EBEA97 /* SXHistoryTableViewController.m */,
-				50AFD27A18E1373800EBEA97 /* SXTutorialViewController.h */,
-				50AFD27B18E1373800EBEA97 /* SXTutorialViewController.m */,
 			);
 			path = game2048;
 			sourceTree = "<group>";
@@ -179,6 +238,10 @@
 		50C7A87818D9AE4E00A22083 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				50C7A88318D9AE4E00A22083 /* Main.storyboard */,
+				50C7A88918D9AE4E00A22083 /* Images.xcassets */,
+				50C7A88018D9AE4E00A22083 /* SXAppDelegate.h */,
+				50C7A88118D9AE4E00A22083 /* SXAppDelegate.m */,
 				50C7A87918D9AE4E00A22083 /* game2048-Info.plist */,
 				50C7A87A18D9AE4E00A22083 /* InfoPlist.strings */,
 				50C7A87D18D9AE4E00A22083 /* main.m */,
@@ -254,6 +317,14 @@
 				LastUpgradeCheck = 0510;
 				ORGANIZATIONNAME = "Sun Xi";
 				TargetAttributes = {
+					50C7A86D18D9AE4E00A22083 = {
+						DevelopmentTeam = B83JBVZ6M5;
+						SystemCapabilities = {
+							com.apple.GameCenter = {
+								enabled = 1;
+							};
+						};
+					};
 					50C7A88E18D9AE4F00A22083 = {
 						TestTargetID = 50C7A86D18D9AE4E00A22083;
 					};
@@ -285,6 +356,7 @@
 			files = (
 				50AFD2BF18E15E6200EBEA97 /* Images.xcassets in Resources */,
 				50C7A9AD18DC323F00A22083 /* theme.plist in Resources */,
+				5076807718E1E02B00BD9422 /* WeiboSDK.bundle in Resources */,
 				50C7A87C18D9AE4E00A22083 /* InfoPlist.strings in Resources */,
 				50C7A88518D9AE4E00A22083 /* Main.storyboard in Resources */,
 			);
@@ -311,8 +383,10 @@
 				50AFD24C18E00E5B00EBEA97 /* SXAppConfig.m in Sources */,
 				50AFD24918E0033400EBEA97 /* SXHistoryModel.m in Sources */,
 				50C7A96918DADE1D00A22083 /* SXNumberCell.m in Sources */,
+				50ADDAC218E2BF2A001697F5 /* SXReplayViewController.m in Sources */,
 				50C7A87E18D9AE4E00A22083 /* main.m in Sources */,
 				50C7A9B018DC362D00A22083 /* SXSettingViewController.m in Sources */,
+				5076807118E1CD1700BD9422 /* SXGCHelper.m in Sources */,
 				50C7A88218D9AE4E00A22083 /* SXAppDelegate.m in Sources */,
 				50AFD27C18E1373800EBEA97 /* SXTutorialViewController.m in Sources */,
 			);
@@ -446,9 +520,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/game2048/WeChat",
+					"$(PROJECT_DIR)/game2048/libWeiboSDK",
 				);
 				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "D1D99B28-7B99-47B4-948A-DAFDEAB68B17";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};
@@ -466,8 +543,11 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/game2048/WeChat",
+					"$(PROJECT_DIR)/game2048/libWeiboSDK",
 				);
+				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "D1D99B28-7B99-47B4-948A-DAFDEAB68B17";
 				VALID_ARCHS = "armv7 armv7s";
 				WRAPPER_EXTENSION = app;
 			};

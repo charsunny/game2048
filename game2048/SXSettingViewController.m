@@ -8,6 +8,8 @@
 
 #import "SXSettingViewController.h"
 #import "SXThemeViewController.h"
+#import "SXGCHelper.h"
+@import GameKit;
 
 @interface SXSettingViewController ()<UIPickerViewDataSource, UIPickerViewDelegate>
 
@@ -97,6 +99,16 @@
         }
         [tableView reloadData];
         [tableView endUpdates];
+    }
+    
+    if (indexPath.row == 1 && indexPath.section == 1) {
+        GKLeaderboardViewController *leaderboardController = [[GKLeaderboardViewController alloc] init];
+        if (leaderboardController != nil && [[SXGCHelper sharedInstance] userAuthenticated]) {
+            //leaderboardController.leaderboardDelegate = self;
+            [self presentViewController:leaderboardController animated:YES completion:nil];
+        } else {
+            [[[UIAlertView alloc] initWithTitle:@"提示" message:@"还在测试中，没能连接到game center" delegate:nil cancelButtonTitle:@"确定" otherButtonTitles:nil, nil] show];
+        }
     }
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import "SXHistoryTableViewController.h"
+#import "SXReplayViewController.h"
 #import "SXAppConfig.h"
 
 @interface SXHistoryTableViewController ()
@@ -56,8 +57,17 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" forIndexPath:indexPath];
+    
     SXHistoryModel* model = [_historyArray objectAtIndex:indexPath.row];
-    [cell.textLabel setText:[NSString stringWithFormat:@"得分: %ld",(long)model.score]];
+    
+    NSMutableAttributedString* string = [[NSMutableAttributedString alloc] initWithString:@"得分：" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]}];
+    [string appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld",(long)model.score] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor redColor]}]];
+    
+    [string appendAttributedString:[[NSAttributedString alloc] initWithString:@"\t最大数字：" attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18]}]];
+    
+    [string appendAttributedString:[[NSAttributedString alloc] initWithString:[NSString stringWithFormat:@"%ld",(long)model.maxNum] attributes:@{NSFontAttributeName:[UIFont systemFontOfSize:18],NSForegroundColorAttributeName:[UIColor blueColor]}]];
+    
+    [cell.textLabel setAttributedText:string];
     [cell.detailTextLabel setText:[NSString stringWithFormat:@"时间: %@", model.time]];
     return cell;
 }
@@ -72,7 +82,6 @@
 }
 
 
-
 // Override to support editing the table view.
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -85,23 +94,6 @@
 }
 
 
-/*
-// Override to support rearranging the table view.
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath
-{
-}
-*/
-
-/*
-// Override to support conditional rearranging of the table view.
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the item to be re-orderable.
-    return YES;
-}
-*/
-
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -109,8 +101,14 @@
 {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([sender isKindOfClass:[UITableViewCell class]] && [segue.destinationViewController isKindOfClass:[SXReplayViewController class]]) {
+        UITableViewCell* cell = (UITableViewCell*)sender;
+        NSIndexPath* indexPath = [self.tableView indexPathForCell:cell];
+        SXReplayViewController* controller = (SXReplayViewController*)segue.destinationViewController;
+        controller.repleyInfo = [_historyArray objectAtIndex:indexPath.row];
+    }
 }
-*/
+
 - (IBAction)order:(UIBarButtonItem*)sender {
     _orderByScore = !_orderByScore;
     [self.tableView beginUpdates];

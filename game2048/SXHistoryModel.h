@@ -12,7 +12,9 @@
 
 @property (nonatomic, strong) NSString* time;
 
-@property (nonatomic,) NSInteger score;
+@property (nonatomic) NSInteger score;
+
+@property (nonatomic) NSInteger maxNum;
 
 @property (strong, nonatomic) NSMutableArray* steps;
 

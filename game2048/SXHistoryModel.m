@@ -14,6 +14,7 @@
     [aCoder encodeObject:self.time forKey:@"time"];
     [aCoder encodeObject:@(self.score) forKey:@"score"];
     [aCoder encodeObject:self.steps forKey:@"steps"];
+    [aCoder encodeObject:@(self.maxNum) forKey:@"maxnum"];
 }
 
 - (id)initWithCoder:(NSCoder *)aDecoder {
@@ -21,6 +22,7 @@
         self.score = [[aDecoder decodeObjectForKey:@"score"] integerValue];
         self.time = [aDecoder decodeObjectForKey:@"time"];
         self.steps = [aDecoder decodeObjectForKey:@"steps"];
+        self.maxNum = [[aDecoder decodeObjectForKey:@"maxNum"] integerValue];
     }
     return self;
 }

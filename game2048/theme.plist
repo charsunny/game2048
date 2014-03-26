@@ -2,29 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <array>
-    <dict>
-		<key>cell</key>
-		<array>
-			<integer>14929751</integer>
-			<integer>16750866</integer>
-			<integer>15240789</integer>
-			<integer>16750866</integer>
-			<integer>15437397</integer>
-			<integer>16769924</integer>
-			<integer>16766720</integer>
-			<integer>14329193</integer>
-			<integer>14919785</integer>
-			<integer>16736512</integer>
-			<integer>15569185</integer>
-			<integer>16744448</integer>
-		</array>
-		<key>bgcell</key>
-		<real>9662683</real>
-		<key>bg</key>
-		<real>15132410</real>
-		<key>name</key>
-		<string>黄色</string>
-	</dict>
 	<dict>
 		<key>cell</key>
 		<array>
@@ -48,7 +25,30 @@
 		<key>name</key>
 		<string>红色</string>
 	</dict>
-    <dict>
+	<dict>
+		<key>cell</key>
+		<array>
+			<integer>14929751</integer>
+			<integer>16750866</integer>
+			<integer>15240789</integer>
+			<integer>16750866</integer>
+			<integer>15437397</integer>
+			<integer>16769924</integer>
+			<integer>16766720</integer>
+			<integer>14329193</integer>
+			<integer>14919785</integer>
+			<integer>16736512</integer>
+			<integer>15569185</integer>
+			<integer>16744448</integer>
+		</array>
+		<key>bgcell</key>
+		<real>9662683</real>
+		<key>bg</key>
+		<real>15132410</real>
+		<key>name</key>
+		<string>黄色</string>
+	</dict>
+	<dict>
 		<key>cell</key>
 		<array>
 			<integer>10720384</integer>

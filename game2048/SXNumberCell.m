@@ -82,6 +82,7 @@
         return;
     }
     if (self.mergeCell) {
+        number = 2*number;
         SXNumberCell* mergecell = (SXNumberCell*)[[self superview] viewWithTag:self.mergeCell];
         self.mergeCell = 0;
         [mergecell dismissToTag:tag];

@@ -81,14 +81,9 @@
 }
 
 - (IBAction)startGame:(id)sender {
-    UINavigationController* navController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"mainController"];
-    [UIView animateWithDuration:.3f animations:^{
-        self.view.alpha = 0;
-    } completion:^(BOOL finished) {
-        [self presentViewController:navController animated:NO completion:^{
-        }];
+    [self dismissViewControllerAnimated:YES completion:^{
+        //do nothing
     }];
-    
 }
 
 @end
